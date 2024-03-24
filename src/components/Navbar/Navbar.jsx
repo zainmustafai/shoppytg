@@ -1,16 +1,30 @@
 import React from 'react'
-import { Box, Button, Container, Divider, Image } from '@chakra-ui/react'
+import { Box, Button, Container, Divider, Image, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 const Navbar = () => {
     return (
         <nav>
             <Box mx={"auto"} maxWidth={"6xl"} display={"flex"} justifyContent={'space-between'} p={4}>
-                <Image
-                    src="/src/assets/logo.png"
-                    alt="react logo"
-                    boxSize="50px"
-                    rounded={"full"}
-                />
+                <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                >
+                    <Image
+                        src="/src/assets/logo.png"
+                        alt="react logo"
+                        boxSize="50px"
+                        rounded={"full"}
+                    />
+                    <Text
+                        fontSize={"2xl"}
+                        fontWeight={"bold"}
+                        letterSpacing={"wide"}
+                        color={"gray.800"}
+                        ml={2}
+                    >
+                        SHOPPY
+                    </Text>
+                </Box>
 
                 <Link to={'/register'}>
                     <Button>
