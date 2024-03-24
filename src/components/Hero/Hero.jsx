@@ -4,7 +4,7 @@ import React from 'react'
 const Hero = () => {
     return (
         <Box  h={"80vh"} bg={"black"} position={"relative"}>
-            <Image src="/src/assets/hero.jpg" alt="hero" w={'100%'} h={'100%'} objectFit={"cover"} />
+            <Image src="/assets/hero.jpg" alt="hero" w={'100%'} h={'100%'} objectFit={"cover"} />
             {/* DARK OVERLAY opacity */}
             <Box bg={"black"} w={'100%'} h={'100%'} opacity={"80%"} position={"absolute"} zIndex={2} top={0} bottom={0} left={0} right={0} />
             {/* HERO TYPOGRAPHY */}

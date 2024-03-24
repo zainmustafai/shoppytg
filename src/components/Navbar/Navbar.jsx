@@ -10,7 +10,7 @@ const Navbar = () => {
                     alignItems={"center"}
                 >
                     <Image
-                        src="/src/assets/logo.png"
+                        src="/assets/logo.png"
                         alt="react logo"
                         boxSize="50px"
                         rounded={"full"}
