@@ -1,8 +1,10 @@
-import React from 'react'
-import { Card, CardHeader, CardBody, CardFooter, Stack, Heading, Image, Divider, ButtonGroup, Button, Text } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { Card, CardHeader, CardBody, CardFooter, Stack, Heading, Image, Divider, ButtonGroup, Button, Text, Box, } from '@chakra-ui/react'
+import ProductDrawer from '../ProductDrawer/ProductDrawer'
 const ProductCard = ({ product }) => {
+
     return (
-        <Card maxW='sm'>
+        <Card maxW='sm' cursor={"pointer"}>
             <CardBody>
                 <Image
                     src={product?.image}
@@ -16,7 +18,7 @@ const ProductCard = ({ product }) => {
                             product?.title.slice(0, 20) + '...'
                         }
                     </Heading>
-                    <Text>
+                    <Text h={70}>
                         {product?.description.slice(0, 100) + '...'}
                     </Text>
                     <Text color='blue.600' fontSize='2xl'>
@@ -24,7 +26,7 @@ const ProductCard = ({ product }) => {
                     </Text>
                 </Stack>
             </CardBody>
-            <Divider />
+            <Divider color={"gray"} />
             <CardFooter>
                 <ButtonGroup spacing='2'>
                     <Button variant='solid' colorScheme='blue'>
@@ -35,6 +37,9 @@ const ProductCard = ({ product }) => {
                     </Button>
                 </ButtonGroup>
             </CardFooter>
+            <Box w={'100%'} textAlign={"center"}>
+                <ProductDrawer product={product} />
+            </Box>
         </Card>
     )
 }

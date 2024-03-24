@@ -1,6 +1,7 @@
 import React from 'react'
-import { Box, Button, Container, Divider, Image, Text } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Divider, Image, Text } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+
 const Navbar = () => {
     return (
         <nav>
@@ -9,12 +10,14 @@ const Navbar = () => {
                     display={"flex"}
                     alignItems={"center"}
                 >
-                    <Image
-                        src="/assets/logo.png"
-                        alt="react logo"
-                        boxSize="50px"
-                        rounded={"full"}
-                    />
+                    <Link to={'/'}>
+                        <Image
+                            src="/assets/logo.png"
+                            alt="react logo"
+                            boxSize="50px"
+                            rounded={"full"}
+                        />
+                    </Link>
                     <Text
                         fontSize={"2xl"}
                         fontWeight={"bold"}
@@ -26,11 +29,18 @@ const Navbar = () => {
                     </Text>
                 </Box>
 
-                <Link to={'/register'}>
-                    <Button>
-                        Register
-                    </Button>
-                </Link>
+                <ButtonGroup>
+                    <Link to={'/register'}>
+                        <Button>
+                            Register
+                        </Button>
+                    </Link>
+                    <Link to={'/admin'}>
+                        <Button>
+                            Admin Panel
+                        </Button>
+                    </Link>
+                </ButtonGroup>
             </Box>
             <Divider />
         </nav>

@@ -1,7 +1,7 @@
 // ProductList.js
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts, selectAllProducts, selectProductStatus, selectProductError } from './store/productSlice';
+import { fetchProducts, selectAllProducts, selectProductStatus, selectProductError } from "../../store/productSlice";
 import ProductCard from '../ProductCard/ProductCard';
 import { Box, Container, Grid, GridItem, Heading, Wrap, WrapItem } from '@chakra-ui/react';
 
@@ -26,11 +26,11 @@ const ProductList = () => {
     }
 
     return (
-        <Box maxW="8xl" mx="auto" px={4} py={5}>
+        <Box maxW="8xl" mx="auto" px={4}>
             <Heading as="h1" size="3xl" textAlign="center" mt={8} mb={4} py={10}>
                 Our Products
             </Heading>
-            <Wrap spacing={6} justify="center">
+            <Wrap spacing={8} justify="center">
                 {products.map(product => (
                     <WrapItem key={product.id}>
                         <ProductCard product={product} />

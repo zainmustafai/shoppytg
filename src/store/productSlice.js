@@ -19,7 +19,18 @@ const productSlice = createSlice({
         status: 'idle',
         error: null,
     },
-    reducers: {},
+    reducers: {
+        // Add a reducer for adding a new product
+        // Add a reducer for updating a product
+        // Add a reducer for deleting a product
+
+        // Reducer for deleting a product
+        deleteProduct: (state, action) => {
+            const { id } = action.payload;
+            state.products = state.products.filter(product => product.id !== id);
+        },
+
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchProducts.pending, (state) => {
@@ -42,3 +53,4 @@ export const selectAllProducts = (state) => state.products.products;
 export const selectProductStatus = (state) => state.products.status;
 export const selectProductError = (state) => state.products.error;
 
+export const { deleteProduct } = productSlice.actions;
