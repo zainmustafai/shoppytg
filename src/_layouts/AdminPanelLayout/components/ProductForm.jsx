@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import {} from  'react-router-dom'
 import {
     FormControl,
     FormLabel,
@@ -14,12 +15,14 @@ import { addProduct, createProduct, updateProduct } from '../../../store/product
 
 import { useDispatch } from 'react-redux';
 import ShowConditional from '../../../components/ShowConditional/ShowConditional';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProductForm = ({ onSubmit, initialProduct, formType }) => {
     const [formData, setFormData] = useState(initialProduct);
     const dispatch = useDispatch();
     const toast = useToast();
+    const navigate = useNavigate();
 
     // HANDLERS:
     const handleReset = () => {
@@ -50,10 +53,19 @@ const ProductForm = ({ onSubmit, initialProduct, formType }) => {
             //     ...formData,
             //     id: Math.floor(Math.random() * 10000)
             // }));
-            dispatch(addProduct({
+            const dataWithID = {
                 ...formData,
                 id: Math.floor(Math.random() * 10000)
-            }));
+            }
+            dispatch(addProduct(dataWithID));
+            toast({
+                title: 'Product Created Successfully!',
+                description: "Product with id : " + formData.id + " has been created successfully!",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            })
+            handleReset();
         } else {
             // DISPATCH UPDATE PRODUCT ACTION
             dispatch(updateProduct(formData));
@@ -77,6 +89,7 @@ const ProductForm = ({ onSubmit, initialProduct, formType }) => {
                 <FormControl id="title">
                     <FormLabel>Title</FormLabel>
                     <Input
+                        autoFocus
                         type="text"
                         name="title"
                         value={formData.title}
@@ -134,7 +147,7 @@ const ProductForm = ({ onSubmit, initialProduct, formType }) => {
                         Submit
                     </Button>
                     {/* RESET FORM */}
-                    <ShowConditional condition={formType === 'create'}>
+                    <ShowConditional condition={formType === 'create' ? true : false}>
                         <Button variant={"outline"} mt={4} w={"100%"} onClick={handleReset}>
                             RESET
                         </Button>

@@ -18,6 +18,7 @@ import { deleteProduct, fetchProducts, selectAllProducts, selectProductError, se
 import ProductDrawer from '../ProductDrawer/ProductDrawer'
 import ProductForm from '../../_layouts/AdminPanelLayout/components/ProductForm'
 import ModalDialog from '../Modal/Modal'
+import { HashLink } from 'react-router-hash-link'
 
 const ProductsTable = () => {
     const toast = useToast();
@@ -46,7 +47,7 @@ const ProductsTable = () => {
         const isConfirmed = window.confirm("Are you sure you want to delete?");
         if (isConfirmed) {
             // dispatch the deleteProduct action
-            dispatch(deleteProduct(id));
+            dispatch(deleteProduct({ id }));
             toast({
                 title: 'Product Deleted Successfully!',
                 description: "Product with id : " + id + " has been deleted successfully!",
@@ -75,9 +76,11 @@ const ProductsTable = () => {
                     <Tbody>
                         {
                             products.map(product => (
-                                <Tr key={product.id}>
-                                    <Td>{product.id}</Td>
-                                    <Td>{product.title.slice(0, 20)}...</Td>
+                                <Tr key={product.id} id={product.id}>
+                                    <Td><HashLink
+                                        to={`/admin#${product.id}`}
+                                    >{product.id}</HashLink></Td>
+                                    <Td> {product.title.length > 20 ? product.title.slice(0, 20) + "..." : product.title}</Td>
                                     <Td>{product.category}</Td>
                                     <Td>{product.price}</Td>
                                     <Td>{product?.rating?.rate ? product?.rating?.rate : 0}/5  ({product?.rating?.count ? product?.rating?.count : 0}) </Td>
@@ -106,7 +109,7 @@ const ProductsTable = () => {
                     </Tbody>
                 </Table>
             </TableContainer>
-        </div>
+        </div >
     )
 }
 

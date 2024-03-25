@@ -32,8 +32,8 @@ export const updateProduct = createAsyncThunk(
     }
 );
 
-// DELETE PRODUCT ASYNC THUNK
-export const deleteProduct = createAsyncThunk(
+// DELETE PRODUCT ASYNC THUNK : IN CASE YOU NEED IT
+export const deleteProductAsync = createAsyncThunk(
     'products/deleteProduct',
     async (id) => {
         const response = await productService.deleteProduct(id);
@@ -55,10 +55,18 @@ const productSlice = createSlice({
         // Add a reducer for deleting a product
 
         addProduct: (state, action) => {
-            state.products.push(action.payload);
+            const product = action.payload;
+            const undatedProducts = [product, ...state.products];
+            state.products = undatedProducts;
+            // state.products.push(action.payload);
         },
-
-
+        deleteProduct: (state, action) => {
+            console.log("Product with id : ", action.payload, " has been deleted successfully!");
+            // SINCE THE API I AM USING HAS LIMATATIONS ON DELETE REQUESTS, I WILL USE FILTER METHOD TO DELETE THE PRODUCT LOCALLY 
+            const { id } = action.payload;
+            console.log("Product with id : ", id, " has been deleted successfully!");
+            state.products = state.products.filter(product => product.id !== id);
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -93,13 +101,6 @@ const productSlice = createSlice({
             }
 
         });
-
-        //DELETE PRODUCT REDUCERS
-        builder.addCase(deleteProduct.fulfilled, (state, action) => {
-            const { id } = action.payload;
-            console.log("Product with id : ", id, " has been deleted successfully!");
-            state.products = state.products.filter(product => product.id !== id);
-        });
     },
 });
 
@@ -109,4 +110,4 @@ export const selectAllProducts = (state) => state.products.products;
 export const selectProductStatus = (state) => state.products.status;
 export const selectProductError = (state) => state.products.error;
 
-export const { addProduct } = productSlice.actions;
+export const { addProduct, deleteProduct } = productSlice.actions;

@@ -7,9 +7,12 @@ import {
     Button,
     Text,
     Checkbox,
+    useToast,
 } from '@chakra-ui/react';
+
 import { useNavigate } from 'react-router-dom';
 const Register = () => {
+    const toast = useToast();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: '',
@@ -24,9 +27,45 @@ const Register = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const validateFormData = (formData) => {
+        for (const key in formData) {
+            if (formData[key] === '') {
+                toast({
+                    title: "Error",
+                    description: "Please fill all fields",
+                    status: "error",
+                    duration: 9000,
+                    isClosable: true,
+                })
+                return false;
+            }
+        }
+        if (formData.password.length < 8) {
+            toast({
+                title: "Error",
+                description: "Password must be at least 8 characters long",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+            });
+            return false;
+        }
+        return true;
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData); // Replace with your form submission logic
+        if (validateFormData(formData)) {
+            toast({
+                title: "Success",
+                description: "Form submitted successfully",
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+            });
+            // Navigate to the home page
+            navigate('/');
+        }
         // IF any field is empty, return
     };
     return (
@@ -92,9 +131,7 @@ const Register = () => {
                         <FormLabel htmlFor="showPassword" mt={4}>Show Password</FormLabel>
                     </Box>
                 </FormControl>
-                <Button mt={4} colorScheme="blue" type="submit" w={"100%"} onClick={() => {
-                    navigate('/')
-                }}>
+                <Button mt={4} colorScheme="blue" type="submit" w={"100%"} >
                     Register
                 </Button>
 

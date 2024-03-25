@@ -38,10 +38,10 @@ const ProductCard = ({ product }) => {
                     <Button variant='ghost' colorScheme='blue'>
                         Add to cart
                     </Button>
+                    <ProductDrawer product={product} />
                 </ButtonGroup>
             </CardFooter>
             <Box w={'100%'} textAlign={"center"}>
-                <ProductDrawer product={product} />
             </Box>
         </Card>
     )

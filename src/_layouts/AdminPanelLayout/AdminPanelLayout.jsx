@@ -65,7 +65,7 @@ const AdminPanelLayout = () => {
                 />
             </ShowConditional>
 
-            <Box m={"auto"} overflow={"auto"}>
+            <Box m={"auto"} overflow={"auto"} p={8}>
                 <ProductsTable />
             </Box>
         </div>
