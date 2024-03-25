@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts, selectAllProducts, selectProductStatus, selectProductError } from "../../store/productSlice";
 import ProductCard from '../ProductCard/ProductCard';
-import { Box, Container, Grid, GridItem, Heading, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box,Heading, Wrap, WrapItem } from '@chakra-ui/react';
 
 const ProductList = () => {
     const dispatch = useDispatch();
