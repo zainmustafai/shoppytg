@@ -9,19 +9,60 @@ import {
     Center,
     Image,
     Box,
-    Select
+    Select,
+    useToast
 } from '@chakra-ui/react';
+import {  createProduct, updateProduct } from '../../../store/productSlice';
 
-const ProductForm = ({ onSubmit, initialProduct }) => {
+import { useDispatch } from 'react-redux';
+import ShowConditional from '../../../components/ShowConditional/ShowConditional';
+
+
+const ProductForm = ({ onSubmit, initialProduct, formType }) => {
     const [formData, setFormData] = useState(initialProduct);
+    const dispatch = useDispatch();
+    const toast = useToast();
+
+    // HANDLERS:
+    const handleReset = () => {
+        setFormData({
+            title: '',
+            price: 0,
+            image: '',
+            description: '',
+            category: '',
+            rating: {
+                rate: 0.00,
+                count: 0
+            }
+        })
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (formType === 'create') {
+            // DISPATCH CREATE PRODUCT ACTION
+            dispatch(createProduct(formData));
+            // dispatch(addProduct(responseProduct));
+        } else {
+            // DISPATCH UPDATE PRODUCT ACTION
+            dispatch(updateProduct(formData));
+            toast({
+                title: 'Product Updated Successfully!',
+                description: "Product with id : " + formData.id + " has been updated successfully!",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+
+            })
+
+        }
         onSubmit(formData);
     };
 
@@ -64,10 +105,12 @@ const ProductForm = ({ onSubmit, initialProduct }) => {
                         type="text"
                         name="category"
                         value={formData.category}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                            setFormData({ ...formData, category: e.target.value })
+                        }}
                         required
                     >
-                        <option value="electronics">Men's Jackets</option>
+                        <option value="Men's Jackets">Men's Jackets</option>
                         <option value="jewel">Jewellery</option>
                     </Select>
                 </FormControl>
@@ -86,6 +129,12 @@ const ProductForm = ({ onSubmit, initialProduct }) => {
                     <Button type="submit" colorScheme="teal" mt={4} w={"100%"}>
                         Submit
                     </Button>
+                    {/* RESET FORM */}
+                    <ShowConditional condition={formType === 'create'}>
+                        <Button variant={"outline"} mt={4} w={"100%"} onClick={handleReset}>
+                            RESET
+                        </Button>
+                    </ShowConditional>
                 </Box>
             </VStack>
         </form>

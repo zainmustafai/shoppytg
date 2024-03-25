@@ -11,6 +11,9 @@ const ProductCard = ({ product }) => {
                     alt='Green double couch with wooden legs'
                     borderRadius='lg'
                     h={64}
+                    onErrorCapture={(e) => {
+                        e.target.src = 'https://via.placeholder.com/300';
+                    }}
                 />
                 <Stack mt='6' spacing='3'>
                     <Heading size='md'>

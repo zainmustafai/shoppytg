@@ -20,9 +20,8 @@ export default function ProductDrawer({ product, openDrawer, setDrawerProduct })
           // variant={"outline"}
           onClick={() => handleClick(size)}
           key={size}
-          m={4}
         >
-          View Details
+          View
         </Button>
       ))}
 
@@ -38,13 +37,16 @@ export default function ProductDrawer({ product, openDrawer, setDrawerProduct })
           <DrawerHeader bg="teal.500" color="white">{product.title}</DrawerHeader>
           <DrawerBody>
             <Box>
-              <Image src={product.image} alt={product.title} />
+              <Image src={product.image} alt={product.title}
+                onErrorCapture={(e) => {
+                  e.target.src = 'https://via.placeholder.com/300';
+                }} />
               <Text mt={4} fontSize="xl" fontWeight="bold" textAlign="center">Price: ${product.price}</Text>
               <Text mt={2} fontSize="xl">Category</Text>
               <Text mt={2} fontSize="md">{product.category}</Text>
               <Text mt={2} fontSize="xl">Description:</Text>
               <Text mt={2} fontSize="md">{product.description}</Text>
-              <Text mt={2} fontSize="md" textAlign="center">Rating: {product.rating.rate} ({product.rating.count} reviews)</Text>
+              <Text mt={2} fontSize="md" textAlign="center">Rating: {product?.rating?.rate ? product?.rating?.rate : 0} ({product?.rating?.count ? product?.rating?.count : 0} reviews)</Text>
             </Box>
           </DrawerBody>
           <DrawerFooter justifyContent="center">

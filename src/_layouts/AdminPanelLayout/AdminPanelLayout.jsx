@@ -8,6 +8,7 @@ import ShowConditional from '../../components/ShowConditional/ShowConditional'
 const AdminPanelLayout = () => {
     const [showForm, setShowForm] = useState(false);
 
+
     return (
         <div>
             <Box>
@@ -46,16 +47,18 @@ const AdminPanelLayout = () => {
                 </Button>
             </Box>
             <ShowConditional isVisble={showForm}>
-                <ProductForm initialProduct={{
-                    title: '',
-                    price: 0,
-                    description: '',
-                    category: '',
-                    rating: {
-                        rate: 0.00,
-                        count: 0
-                    }
-                }}
+                <ProductForm
+                    formType={'create'}
+                    initialProduct={{
+                        title: '',
+                        price: 0,
+                        description: '',
+                        category: '',
+                        rating: {
+                            rate: 0.00,
+                            count: 0
+                        }
+                    }}
                     onSubmit={(product) => {
                         console.log(product);
                     }}

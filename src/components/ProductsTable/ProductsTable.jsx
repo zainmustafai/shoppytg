@@ -15,6 +15,9 @@ import {
 } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteProduct, fetchProducts, selectAllProducts, selectProductError, selectProductStatus } from '../../store/productSlice'
+import ProductDrawer from '../ProductDrawer/ProductDrawer'
+import ProductForm from '../../_layouts/AdminPanelLayout/components/ProductForm'
+import ModalDialog from '../Modal/Modal'
 
 const ProductsTable = () => {
     const toast = useToast();
@@ -38,20 +41,19 @@ const ProductsTable = () => {
     }
     // HANDLERS:
     const handleDeleteClick = (id) => {
-        console.log(`Delete product with id: ${id}`)
         // Prompt the user to confirm the deletion
         // If the user confirms, dispatch the deleteProduct action
         const isConfirmed = window.confirm("Are you sure you want to delete?");
-        toast({
-            title: 'Product Deleted Successfully!',
-            description: "Product with id : " + id + " has been deleted successfully!",
-            status: 'success',
-            duration: 3000,
-            isClosable: true,
-        });
         if (isConfirmed) {
             // dispatch the deleteProduct action
-            dispatch(deleteProduct({ id }));
+            dispatch(deleteProduct(id));
+            toast({
+                title: 'Product Deleted Successfully!',
+                description: "Product with id : " + id + " has been deleted successfully!",
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
         }
     }
 
@@ -78,14 +80,21 @@ const ProductsTable = () => {
                                     <Td>{product.title.slice(0, 20)}...</Td>
                                     <Td>{product.category}</Td>
                                     <Td>{product.price}</Td>
-                                    <Td>{product.rating.rate}/5  ({product.rating.count})</Td>
+                                    <Td>{product?.rating?.rate ? product?.rating?.rate : 0}/5  ({product?.rating?.count ? product?.rating?.count : 0}) </Td>
                                     <Td>
                                         <ButtonGroup>
-                                            <Button colorScheme="teal" variant="solid">
-                                                Edit
-                                            </Button>
+                                            <ProductDrawer product={product} />
+                                            <ModalDialog
+                                                modalSize={"xl"}
+                                                tirggerText='Edit'
+                                            >
+                                                <ProductForm
+                                                    formType={"update"}
+                                                    initialProduct={product}
+                                                />
+                                            </ModalDialog>
                                             <Button colorScheme="red" variant="solid" onClick={() => {
-                                                handleDeleteClick(product.id)
+                                                handleDeleteClick(product?.id)
                                             }}>
                                                 Delete
                                             </Button>
