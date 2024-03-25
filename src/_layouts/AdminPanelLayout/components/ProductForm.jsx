@@ -83,62 +83,71 @@ const ProductForm = ({ onSubmit, initialProduct, formType }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <VStack spacing={4} align="stretch"
-                maxW={"md"} m={"auto"} p={4}>
+        <form onSubmit={handleSubmit} aria-label="Product Form">
+            <VStack spacing={4} align="stretch" maxW={"md"} m={"auto"} p={4}>
                 <FormControl id="title">
-                    <FormLabel>Title</FormLabel>
+                    <FormLabel htmlFor="title">Title</FormLabel>
                     <Input
                         autoFocus
                         type="text"
                         name="title"
+                        id="title"
                         value={formData.title}
                         onChange={handleChange}
                         required
+                        aria-required="true"
                     />
                 </FormControl>
                 <FormControl id="price">
-                    <FormLabel>Price</FormLabel>
+                    <FormLabel htmlFor="price">Price</FormLabel>
                     <Input
                         type="number"
                         name="price"
+                        id="price"
                         value={formData.price}
                         onChange={handleChange}
                         required
+                        aria-required="true"
                     />
                 </FormControl>
                 <FormControl id="description">
-                    <FormLabel>Description</FormLabel>
+                    <FormLabel htmlFor="description">Description</FormLabel>
                     <Textarea
                         name="description"
+                        id="description"
                         value={formData.description}
                         onChange={handleChange}
                         required
+                        aria-required="true"
                     />
                 </FormControl>
                 <FormControl id="category">
-                    <FormLabel>Category</FormLabel>
+                    <FormLabel htmlFor="category">Category</FormLabel>
                     <Select
                         type="text"
                         name="category"
+                        id="category"
                         value={formData.category}
                         onChange={(e) => {
                             setFormData({ ...formData, category: e.target.value })
                         }}
                         required
+                        aria-required="true"
                     >
                         <option value="Men's Jackets">Men's Jackets</option>
                         <option value="jewel">Jewellery</option>
                     </Select>
                 </FormControl>
                 <FormControl id="image">
-                    <FormLabel>Image URL</FormLabel>
+                    <FormLabel htmlFor="image">Image URL</FormLabel>
                     <Input
                         type="url"
                         name="image"
+                        id="image"
                         value={formData.image}
                         onChange={handleChange}
                         required
+                        aria-required="true"
                     />
                 </FormControl>
 
@@ -155,6 +164,7 @@ const ProductForm = ({ onSubmit, initialProduct, formType }) => {
                 </Box>
             </VStack>
         </form>
+
     );
 };
 
