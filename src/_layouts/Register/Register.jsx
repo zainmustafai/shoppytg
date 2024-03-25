@@ -73,7 +73,9 @@ const Register = () => {
             <Box textStyle={"h1"}>
                 <Text fontSize={"4xl"} textAlign={"center"} > Register</Text>
             </Box>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} 
+            aria-label='Registeration Form'
+            >
                 <FormControl>
                     <FormLabel htmlFor="firstName">First Name</FormLabel>
                     <Input
