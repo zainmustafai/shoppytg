@@ -54,6 +54,10 @@ const productSlice = createSlice({
         // Add a reducer for updating a product
         // Add a reducer for deleting a product
 
+        addProduct: (state, action) => {
+            state.products.push(action.payload);
+        },
+
 
     },
     extraReducers: (builder) => {
@@ -92,7 +96,7 @@ const productSlice = createSlice({
 
         //DELETE PRODUCT REDUCERS
         builder.addCase(deleteProduct.fulfilled, (state, action) => {
-            const {id} = action.payload;
+            const { id } = action.payload;
             console.log("Product with id : ", id, " has been deleted successfully!");
             state.products = state.products.filter(product => product.id !== id);
         });
@@ -105,3 +109,4 @@ export const selectAllProducts = (state) => state.products.products;
 export const selectProductStatus = (state) => state.products.status;
 export const selectProductError = (state) => state.products.error;
 
+export const { addProduct } = productSlice.actions;

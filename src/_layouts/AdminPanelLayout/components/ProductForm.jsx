@@ -6,13 +6,11 @@ import {
     Textarea,
     Button,
     VStack,
-    Center,
-    Image,
     Box,
     Select,
     useToast
 } from '@chakra-ui/react';
-import {  createProduct, updateProduct } from '../../../store/productSlice';
+import { addProduct, createProduct, updateProduct } from '../../../store/productSlice';
 
 import { useDispatch } from 'react-redux';
 import ShowConditional from '../../../components/ShowConditional/ShowConditional';
@@ -47,9 +45,15 @@ const ProductForm = ({ onSubmit, initialProduct, formType }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (formType === 'create') {
-            // DISPATCH CREATE PRODUCT ACTION
-            dispatch(createProduct(formData));
-            // dispatch(addProduct(responseProduct));
+            // // DISPATCH CREATE PRODUCT ACTION
+            // dispatch(createProduct({
+            //     ...formData,
+            //     id: Math.floor(Math.random() * 10000)
+            // }));
+            dispatch(addProduct({
+                ...formData,
+                id: Math.floor(Math.random() * 10000)
+            }));
         } else {
             // DISPATCH UPDATE PRODUCT ACTION
             dispatch(updateProduct(formData));
