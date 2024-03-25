@@ -31,14 +31,14 @@ const ProductCard = ({ product }) => {
             </CardBody>
             <Divider color={"gray"} />
             <CardFooter>
-                <ButtonGroup spacing='2'>
-                    <Button variant='solid' colorScheme='blue'>
+                <ButtonGroup spacing='2' display={"flex"} w={"100%"} justifyContent={"space-between"}>
+                    <ProductDrawer product={product} />
+                    <Button variant='solid' colorScheme='blue' w={"100%"} >
                         Buy now
                     </Button>
-                    <Button variant='ghost' colorScheme='blue'>
+                    <Button variant='ghost' colorScheme='blue' w={"100%"}>
                         Add to cart
                     </Button>
-                    <ProductDrawer product={product} />
                 </ButtonGroup>
             </CardFooter>
             <Box w={'100%'} textAlign={"center"}>

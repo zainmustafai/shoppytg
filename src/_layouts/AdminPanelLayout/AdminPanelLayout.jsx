@@ -7,8 +7,6 @@ import ShowConditional from '../../components/ShowConditional/ShowConditional'
 
 const AdminPanelLayout = () => {
     const [showForm, setShowForm] = useState(false);
-
-
     return (
         <div>
             <Box>

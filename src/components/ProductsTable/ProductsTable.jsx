@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useToast } from '@chakra-ui/react'
+import { Box, Spinner, useToast } from '@chakra-ui/react'
 import {
     Table,
     Thead,
@@ -33,7 +33,7 @@ const ProductsTable = () => {
     }, [dispatch, status]);
 
     if (status === 'loading') {
-        return <div>Loading...</div>;
+        return <Box textAlign={"center"} p={10}>  <Spinner size='xl' /></Box>;
     }
 
     if (status === 'failed') {
@@ -95,7 +95,7 @@ const ProductsTable = () => {
                                                     initialProduct={product}
                                                 />
                                             </ModalDialog>
-                                            <Button colorScheme="red" variant="solid" onClick={() => {
+                                            <Button colorScheme="red" variant="solid" w={"100%"} onClick={() => {
                                                 handleDeleteClick(product?.id)
                                             }}>
                                                 Delete

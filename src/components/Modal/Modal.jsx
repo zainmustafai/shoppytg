@@ -22,6 +22,7 @@ export default function ModalDialog({ modalSize, tirggerText, children }) {
   return (
     <>
       <Button
+        w={"100%"}
         onClick={() => handleSizeClick()}
         key={modalSize}
       >{tirggerText}</Button>

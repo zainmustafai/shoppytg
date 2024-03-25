@@ -13,7 +13,7 @@ const Hero = () => {
                     <Heading as={"h1"} fontSize={["2xl", "4xl", "6xl", "8xl"]} fontWeight={"thin"}>
                         Explore, shop, repeat again.
                     </Heading>
-                    <Button rounded={"full"}  variant={"outline"} colorScheme={"yellow"} size={"lg"} position={"relative"} top={"70%"} transform={"translateY(-50%)"} mt={20} px={16} py={8}>SHOP NOW</Button>
+                    <Button rounded={"full"} variant={"outline"} colorScheme={"yellow"} size={"lg"} position={"relative"} top={"70%"} transform={"translateY(-50%)"} mt={20} px={16} py={8}>SHOP NOW</Button>
                 </Box>
             </Box>
         </Box>

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts, selectAllProducts, selectProductStatus, selectProductError } from "../../store/productSlice";
 import ProductCard from '../ProductCard/ProductCard';
-import { Box,Heading, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box, Heading, Spinner, Wrap, WrapItem } from '@chakra-ui/react';
 
 const ProductList = () => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const ProductList = () => {
     }, [dispatch, status]);
 
     if (status === 'loading') {
-        return <div>Loading...</div>;
+        return <Box textAlign={"center"} p={10}>  <Spinner size='xl' /></Box>;
     }
 
     if (status === 'failed') {

@@ -17,6 +17,7 @@ export default function ProductDrawer({ product, openDrawer, setDrawerProduct })
     <>
       {sizes.map((size) => (
         <Button
+          w={"100%"}
           // variant={"outline"}
           onClick={() => handleClick(size)}
           key={size}
